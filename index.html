@@ -1,0 +1,2222 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>幕末維新伝 ── 坂本龍馬の死の真相</title>
+
+<!-- Google Fonts -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@400;700;900&family=Noto+Sans+JP:wght@300;400;500;700&family=Shippori+Mincho:wght@400;700;800&display=swap" rel="stylesheet">
+
+<!-- AOS - Animate on Scroll -->
+<link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet">
+
+<!-- Font Awesome -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+<style>
+/* ============================================
+   RESET & BASE
+   ============================================ */
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+:root {
+  --bg-deepest: #0a0a12;
+  --bg-dark: #121220;
+  --bg-panel: #1a1a2e;
+  --bg-card: #16213e;
+  --text-primary: #e8e2d6;
+  --text-muted: #9a8f7f;
+  --text-accent: #f0e6d3;
+  --gold: #d4a017;
+  --gold-light: #f0c040;
+  --crimson: #c0392b;
+  --crimson-light: #e74c3c;
+  --indigo: #2c3e6b;
+  --indigo-deep: #1a2744;
+  --tosa-green: #2d6a4f;
+  --shinsengumi-blue: #3a6ea5;
+  --sakura: #f4a7bb;
+  --ink: #2c2c2c;
+  --washi: #f5f0e8;
+}
+
+html {
+  scroll-behavior: smooth;
+  font-size: 16px;
+}
+
+body {
+  font-family: 'Noto Sans JP', sans-serif;
+  background: var(--bg-deepest);
+  color: var(--text-primary);
+  line-height: 1.9;
+  overflow-x: hidden;
+}
+
+::selection {
+  background: var(--gold);
+  color: var(--bg-deepest);
+}
+
+/* ============================================
+   READING PROGRESS BAR
+   ============================================ */
+#reading-progress {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 0%;
+  height: 3px;
+  background: linear-gradient(90deg, var(--crimson), var(--gold), var(--crimson));
+  z-index: 10000;
+  transition: width 0.1s linear;
+}
+
+/* ============================================
+   NAVIGATION
+   ============================================ */
+.nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 9999;
+  padding: 0 2rem;
+  transition: all 0.4s ease;
+  backdrop-filter: blur(0px);
+  background: transparent;
+}
+
+.nav.scrolled {
+  background: rgba(10, 10, 18, 0.92);
+  backdrop-filter: blur(20px);
+  border-bottom: 1px solid rgba(212, 160, 23, 0.15);
+}
+
+.nav-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 64px;
+}
+
+.nav-brand {
+  font-family: 'Shippori Mincho', serif;
+  font-weight: 800;
+  font-size: 1.1rem;
+  color: var(--gold);
+  letter-spacing: 0.15em;
+  text-decoration: none;
+}
+
+.nav-links {
+  display: flex;
+  gap: 1.5rem;
+  list-style: none;
+}
+
+.nav-links a {
+  color: var(--text-muted);
+  text-decoration: none;
+  font-size: 0.85rem;
+  font-weight: 500;
+  letter-spacing: 0.05em;
+  transition: color 0.3s;
+  position: relative;
+}
+
+.nav-links a::after {
+  content: '';
+  position: absolute;
+  bottom: -4px;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: var(--gold);
+  transition: width 0.3s;
+}
+
+.nav-links a:hover { color: var(--gold); }
+.nav-links a:hover::after { width: 100%; }
+.nav-links a.active { color: var(--gold); }
+.nav-links a.active::after { width: 100%; }
+
+.nav-toggle {
+  display: none;
+  background: none;
+  border: none;
+  color: var(--gold);
+  font-size: 1.5rem;
+  cursor: pointer;
+}
+
+/* ============================================
+   HERO SECTION
+   ============================================ */
+.hero {
+  position: relative;
+  height: 100vh;
+  min-height: 700px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.hero-bg {
+  position: absolute;
+  inset: 0;
+  background: url('images/00_prologue.png') center/cover no-repeat;
+  filter: brightness(0.25) saturate(0.7);
+  transform: scale(1.1);
+  animation: heroZoom 30s ease-in-out infinite alternate;
+}
+
+@keyframes heroZoom {
+  0% { transform: scale(1.1); }
+  100% { transform: scale(1.2); }
+}
+
+.hero-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    180deg,
+    rgba(10, 10, 18, 0.3) 0%,
+    rgba(10, 10, 18, 0.6) 50%,
+    rgba(10, 10, 18, 0.95) 100%
+  );
+}
+
+.hero-particles {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.petal {
+  position: absolute;
+  width: 8px;
+  height: 8px;
+  background: var(--sakura);
+  border-radius: 50% 0 50% 0;
+  opacity: 0;
+  animation: petalFall linear infinite;
+}
+
+@keyframes petalFall {
+  0% { transform: translateY(-10vh) rotate(0deg); opacity: 0; }
+  10% { opacity: 0.6; }
+  90% { opacity: 0.4; }
+  100% { transform: translateY(110vh) rotate(720deg); opacity: 0; }
+}
+
+.hero-content {
+  position: relative;
+  z-index: 2;
+  text-align: center;
+  padding: 2rem;
+  max-width: 900px;
+}
+
+.hero-era {
+  font-family: 'Shippori Mincho', serif;
+  font-size: 0.9rem;
+  color: var(--gold);
+  letter-spacing: 0.5em;
+  margin-bottom: 1.5rem;
+  opacity: 0;
+  animation: fadeUp 1s 0.5s forwards;
+}
+
+.hero-title {
+  font-family: 'Shippori Mincho', serif;
+  font-weight: 900;
+  font-size: clamp(2.5rem, 6vw, 4.5rem);
+  line-height: 1.3;
+  margin-bottom: 0.5rem;
+  background: linear-gradient(135deg, var(--text-accent), var(--gold-light), var(--text-accent));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  opacity: 0;
+  animation: fadeUp 1s 0.8s forwards;
+}
+
+.hero-subtitle {
+  font-family: 'Shippori Mincho', serif;
+  font-size: clamp(1rem, 2.5vw, 1.5rem);
+  color: var(--text-muted);
+  margin-bottom: 2.5rem;
+  font-weight: 400;
+  opacity: 0;
+  animation: fadeUp 1s 1.1s forwards;
+}
+
+.hero-quote {
+  font-family: 'Shippori Mincho', serif;
+  font-style: italic;
+  font-size: 1.1rem;
+  color: var(--sakura);
+  max-width: 600px;
+  margin: 0 auto 3rem;
+  opacity: 0;
+  animation: fadeUp 1s 1.4s forwards;
+}
+
+.hero-scroll {
+  opacity: 0;
+  animation: fadeUp 1s 1.7s forwards;
+}
+
+.hero-scroll a {
+  color: var(--gold);
+  text-decoration: none;
+  font-size: 0.8rem;
+  letter-spacing: 0.2em;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.scroll-arrow {
+  width: 24px;
+  height: 36px;
+  border: 2px solid var(--gold);
+  border-radius: 12px;
+  position: relative;
+}
+
+.scroll-arrow::before {
+  content: '';
+  position: absolute;
+  top: 8px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 4px;
+  height: 8px;
+  background: var(--gold);
+  border-radius: 2px;
+  animation: scrollBounce 2s infinite;
+}
+
+@keyframes scrollBounce {
+  0%, 100% { top: 8px; opacity: 1; }
+  50% { top: 18px; opacity: 0.3; }
+}
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(30px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* ============================================
+   CHARACTER PROFILES
+   ============================================ */
+.characters-section {
+  padding: 6rem 2rem;
+  background: linear-gradient(180deg, var(--bg-deepest), var(--bg-dark));
+}
+
+.section-header {
+  text-align: center;
+  margin-bottom: 4rem;
+}
+
+.section-label {
+  font-family: 'Shippori Mincho', serif;
+  font-size: 0.8rem;
+  color: var(--gold);
+  letter-spacing: 0.4em;
+  text-transform: uppercase;
+  margin-bottom: 0.5rem;
+}
+
+.section-title {
+  font-family: 'Shippori Mincho', serif;
+  font-weight: 900;
+  font-size: clamp(1.8rem, 4vw, 2.8rem);
+  color: var(--text-accent);
+  margin-bottom: 1rem;
+}
+
+.section-divider {
+  width: 60px;
+  height: 2px;
+  background: var(--gold);
+  margin: 0 auto;
+}
+
+.characters-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2rem;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.character-card {
+  background: var(--bg-panel);
+  border-radius: 12px;
+  overflow: hidden;
+  border: 1px solid rgba(212, 160, 23, 0.1);
+  transition: all 0.4s ease;
+  position: relative;
+}
+
+.character-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  z-index: 1;
+}
+
+.character-card.ryoma::before { background: linear-gradient(90deg, var(--tosa-green), var(--gold)); }
+.character-card.hijikata::before { background: linear-gradient(90deg, var(--shinsengumi-blue), #6cb4ee); }
+.character-card.kondo::before { background: linear-gradient(90deg, var(--crimson), var(--gold)); }
+
+.character-card:hover {
+  transform: translateY(-8px);
+  border-color: rgba(212, 160, 23, 0.3);
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+}
+
+.character-img {
+  width: 100%;
+  aspect-ratio: 16/9;
+  object-fit: cover;
+  display: block;
+}
+
+.character-info {
+  padding: 1.5rem;
+}
+
+.character-name {
+  font-family: 'Shippori Mincho', serif;
+  font-size: 1.5rem;
+  font-weight: 800;
+  color: var(--text-accent);
+  margin-bottom: 0.3rem;
+}
+
+.character-title-text {
+  font-size: 0.85rem;
+  color: var(--gold);
+  margin-bottom: 0.8rem;
+  letter-spacing: 0.1em;
+}
+
+.character-desc {
+  font-size: 0.9rem;
+  color: var(--text-muted);
+  line-height: 1.7;
+}
+
+.character-tags {
+  display: flex;
+  gap: 0.5rem;
+  margin-top: 1rem;
+  flex-wrap: wrap;
+}
+
+.tag {
+  font-size: 0.7rem;
+  padding: 0.25rem 0.6rem;
+  border-radius: 100px;
+  border: 1px solid rgba(212, 160, 23, 0.3);
+  color: var(--gold);
+  letter-spacing: 0.05em;
+}
+
+/* ============================================
+   CONTENT SECTIONS
+   ============================================ */
+.content-section {
+  padding: 5rem 2rem;
+  position: relative;
+}
+
+.content-section:nth-child(even) {
+  background: var(--bg-dark);
+}
+
+.content-section:nth-child(odd) {
+  background: var(--bg-deepest);
+}
+
+.content-inner {
+  max-width: 860px;
+  margin: 0 auto;
+}
+
+/* Part Headers */
+.part-header {
+  position: relative;
+  padding: 8rem 2rem;
+  text-align: center;
+  overflow: hidden;
+}
+
+.part-header-bg {
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: center;
+  filter: brightness(0.3) saturate(0.6);
+}
+
+.part-header-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    180deg,
+    rgba(10, 10, 18, 0.7) 0%,
+    rgba(10, 10, 18, 0.4) 50%,
+    rgba(10, 10, 18, 0.9) 100%
+  );
+}
+
+.part-header-content {
+  position: relative;
+  z-index: 2;
+}
+
+.part-number {
+  font-family: 'Shippori Mincho', serif;
+  font-size: 0.85rem;
+  color: var(--gold);
+  letter-spacing: 0.5em;
+  margin-bottom: 1rem;
+}
+
+.part-title {
+  font-family: 'Shippori Mincho', serif;
+  font-weight: 900;
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  color: var(--text-accent);
+  margin-bottom: 1rem;
+  line-height: 1.4;
+}
+
+.part-subtitle {
+  font-family: 'Shippori Mincho', serif;
+  font-size: 1.1rem;
+  color: var(--text-muted);
+  font-weight: 400;
+}
+
+/* Section Headings */
+.content-section h2 {
+  font-family: 'Shippori Mincho', serif;
+  font-weight: 800;
+  font-size: clamp(1.4rem, 3vw, 2rem);
+  color: var(--text-accent);
+  margin-bottom: 2rem;
+  padding-bottom: 0.8rem;
+  border-bottom: 1px solid rgba(212, 160, 23, 0.2);
+  position: relative;
+}
+
+.content-section h2::after {
+  content: '';
+  position: absolute;
+  bottom: -1px;
+  left: 0;
+  width: 80px;
+  height: 2px;
+  background: var(--gold);
+}
+
+.content-section h3 {
+  font-family: 'Shippori Mincho', serif;
+  font-weight: 700;
+  font-size: 1.3rem;
+  color: var(--gold-light);
+  margin: 2.5rem 0 1.2rem;
+}
+
+.content-section p {
+  margin-bottom: 1.5rem;
+  font-size: 1rem;
+  line-height: 2;
+}
+
+/* ============================================
+   BLOCKQUOTES (Character Quotes)
+   ============================================ */
+.quote-block {
+  position: relative;
+  padding: 1.5rem 1.5rem 1.5rem 2rem;
+  margin: 1.5rem 0;
+  border-radius: 0 8px 8px 0;
+  background: rgba(26, 26, 46, 0.7);
+}
+
+.quote-block::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 4px;
+  border-radius: 4px 0 0 4px;
+}
+
+.quote-block.ryoma { border-left: none; }
+.quote-block.ryoma::before { background: linear-gradient(180deg, var(--tosa-green), var(--gold)); }
+.quote-block.hijikata { border-left: none; }
+.quote-block.hijikata::before { background: linear-gradient(180deg, var(--shinsengumi-blue), #6cb4ee); }
+.quote-block.kondo { border-left: none; }
+.quote-block.kondo::before { background: linear-gradient(180deg, var(--crimson), var(--gold)); }
+
+.quote-speaker {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-family: 'Shippori Mincho', serif;
+  font-weight: 700;
+  font-size: 0.85rem;
+  margin-bottom: 0.6rem;
+  letter-spacing: 0.1em;
+}
+
+.quote-speaker.ryoma { color: var(--tosa-green); }
+.quote-speaker.hijikata { color: var(--shinsengumi-blue); }
+.quote-speaker.kondo { color: var(--crimson-light); }
+
+.quote-speaker-icon {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid currentColor;
+}
+
+.quote-text {
+  font-family: 'Shippori Mincho', serif;
+  font-size: 1rem;
+  line-height: 2;
+  color: var(--text-primary);
+}
+
+/* ============================================
+   HIGHLIGHT BOXES
+   ============================================ */
+.highlight-box {
+  background: linear-gradient(135deg, rgba(192, 57, 43, 0.12), rgba(212, 160, 23, 0.12));
+  border: 1px solid rgba(212, 160, 23, 0.2);
+  border-radius: 8px;
+  padding: 1.5rem 2rem;
+  margin: 2rem 0;
+  position: relative;
+}
+
+.highlight-box::before {
+  content: '\f06a';
+  font-family: 'Font Awesome 6 Free';
+  font-weight: 900;
+  position: absolute;
+  top: -12px;
+  left: 20px;
+  background: var(--bg-deepest);
+  color: var(--gold);
+  padding: 0 0.5rem;
+  font-size: 0.9rem;
+}
+
+.highlight-box p {
+  font-family: 'Shippori Mincho', serif;
+  font-weight: 700;
+  color: var(--gold-light);
+  font-size: 0.95rem;
+  line-height: 1.9;
+  margin-bottom: 0;
+}
+
+.highlight-box.verdict {
+  background: linear-gradient(135deg, rgba(192, 57, 43, 0.2), rgba(192, 57, 43, 0.05));
+  border-color: rgba(192, 57, 43, 0.3);
+}
+
+.highlight-box.verdict p {
+  color: var(--crimson-light);
+}
+
+/* ============================================
+   SECTION IMAGES
+   ============================================ */
+.section-image {
+  width: 100%;
+  border-radius: 8px;
+  margin: 2rem 0;
+  display: block;
+  border: 1px solid rgba(212, 160, 23, 0.1);
+  cursor: pointer;
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.section-image:hover {
+  transform: scale(1.01);
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+}
+
+.image-caption {
+  text-align: center;
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  margin-top: -1rem;
+  margin-bottom: 2rem;
+  font-style: italic;
+}
+
+/* ============================================
+   TABLES
+   ============================================ */
+.data-table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  margin: 2rem 0;
+  border-radius: 8px;
+  overflow: hidden;
+  border: 1px solid rgba(212, 160, 23, 0.15);
+}
+
+.data-table thead th {
+  background: rgba(212, 160, 23, 0.15);
+  padding: 1rem;
+  font-family: 'Shippori Mincho', serif;
+  font-weight: 700;
+  font-size: 0.9rem;
+  color: var(--gold-light);
+  text-align: left;
+  letter-spacing: 0.05em;
+}
+
+.data-table tbody td {
+  padding: 0.8rem 1rem;
+  border-bottom: 1px solid rgba(212, 160, 23, 0.07);
+  font-size: 0.9rem;
+  color: var(--text-primary);
+  vertical-align: top;
+}
+
+.data-table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+.data-table tbody tr:hover {
+  background: rgba(212, 160, 23, 0.05);
+}
+
+.data-table .highlight-cell {
+  font-weight: 700;
+  color: var(--gold-light);
+}
+
+/* ============================================
+   CONSPIRACY DIAGRAM
+   ============================================ */
+.conspiracy-diagram {
+  background: var(--bg-panel);
+  border: 1px solid rgba(212, 160, 23, 0.2);
+  border-radius: 12px;
+  padding: 2.5rem;
+  margin: 2.5rem 0;
+  text-align: center;
+}
+
+.conspiracy-title {
+  font-family: 'Shippori Mincho', serif;
+  font-weight: 800;
+  font-size: 1.2rem;
+  color: var(--crimson-light);
+  margin-bottom: 2rem;
+}
+
+.conspiracy-layer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  margin: 1rem 0;
+}
+
+.conspiracy-badge {
+  padding: 0.7rem 1.5rem;
+  border-radius: 8px;
+  font-family: 'Shippori Mincho', serif;
+  font-weight: 700;
+  font-size: 0.9rem;
+  min-width: 200px;
+}
+
+.conspiracy-badge.execution {
+  background: rgba(192, 57, 43, 0.2);
+  border: 1px solid var(--crimson);
+  color: var(--crimson-light);
+}
+
+.conspiracy-badge.middle {
+  background: rgba(58, 110, 165, 0.2);
+  border: 1px solid var(--shinsengumi-blue);
+  color: #6cb4ee;
+}
+
+.conspiracy-badge.mastermind {
+  background: rgba(212, 160, 23, 0.2);
+  border: 1px solid var(--gold);
+  color: var(--gold-light);
+}
+
+.conspiracy-arrow {
+  color: var(--text-muted);
+  font-size: 1.2rem;
+  transform: rotate(90deg);
+  margin: 0.5rem 0;
+}
+
+.conspiracy-label {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  letter-spacing: 0.1em;
+}
+
+/* ============================================
+   TIMELINE
+   ============================================ */
+.timeline-section {
+  padding: 6rem 2rem;
+  background: var(--bg-dark);
+}
+
+.timeline {
+  max-width: 800px;
+  margin: 0 auto;
+  position: relative;
+}
+
+.timeline::before {
+  content: '';
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  background: linear-gradient(180deg, var(--gold), var(--crimson), var(--gold));
+}
+
+.timeline-item {
+  display: flex;
+  align-items: flex-start;
+  margin-bottom: 2rem;
+  position: relative;
+}
+
+.timeline-item:nth-child(odd) {
+  flex-direction: row;
+  padding-right: calc(50% + 2rem);
+  text-align: right;
+}
+
+.timeline-item:nth-child(even) {
+  flex-direction: row-reverse;
+  padding-left: calc(50% + 2rem);
+  text-align: left;
+}
+
+.timeline-dot {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: var(--gold);
+  border: 3px solid var(--bg-dark);
+  z-index: 2;
+}
+
+.timeline-item.critical .timeline-dot {
+  background: var(--crimson);
+  width: 18px;
+  height: 18px;
+  box-shadow: 0 0 15px rgba(192, 57, 43, 0.5);
+}
+
+.timeline-date {
+  font-family: 'Shippori Mincho', serif;
+  font-weight: 700;
+  font-size: 0.85rem;
+  color: var(--gold);
+  margin-bottom: 0.3rem;
+}
+
+.timeline-event {
+  font-family: 'Shippori Mincho', serif;
+  font-weight: 700;
+  font-size: 1rem;
+  color: var(--text-accent);
+  margin-bottom: 0.3rem;
+}
+
+.timeline-desc {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+}
+
+/* ============================================
+   EPILOGUE
+   ============================================ */
+.epilogue-section {
+  padding: 6rem 2rem;
+  background: linear-gradient(180deg, var(--bg-deepest), #0d0d1a);
+  text-align: center;
+}
+
+.epilogue-final {
+  font-family: 'Shippori Mincho', serif;
+  font-weight: 900;
+  font-size: clamp(1.3rem, 3vw, 2rem);
+  color: var(--gold-light);
+  max-width: 700px;
+  margin: 3rem auto;
+  line-height: 1.8;
+}
+
+.epilogue-subtitle {
+  font-family: 'Shippori Mincho', serif;
+  font-size: 1rem;
+  color: var(--sakura);
+  font-style: italic;
+  margin-top: 1rem;
+}
+
+/* ============================================
+   FOOTER
+   ============================================ */
+.footer {
+  padding: 3rem 2rem;
+  border-top: 1px solid rgba(212, 160, 23, 0.1);
+  text-align: center;
+  background: var(--bg-deepest);
+}
+
+.footer p {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  margin-bottom: 0.3rem;
+}
+
+.footer .credits {
+  color: var(--gold);
+  font-size: 0.7rem;
+  letter-spacing: 0.1em;
+}
+
+/* ============================================
+   LIGHTBOX
+   ============================================ */
+.lightbox {
+  display: none;
+  position: fixed;
+  inset: 0;
+  z-index: 100000;
+  background: rgba(0, 0, 0, 0.95);
+  backdrop-filter: blur(10px);
+  justify-content: center;
+  align-items: center;
+  cursor: zoom-out;
+}
+
+.lightbox.active { display: flex; }
+
+.lightbox img {
+  max-width: 90vw;
+  max-height: 90vh;
+  border-radius: 8px;
+  box-shadow: 0 20px 80px rgba(0, 0, 0, 0.8);
+}
+
+.lightbox-close {
+  position: absolute;
+  top: 2rem;
+  right: 2rem;
+  background: none;
+  border: none;
+  color: white;
+  font-size: 2rem;
+  cursor: pointer;
+}
+
+/* ============================================
+   BACK TO TOP
+   ============================================ */
+.back-to-top {
+  position: fixed;
+  bottom: 2rem;
+  right: 2rem;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: var(--gold);
+  color: var(--bg-deepest);
+  border: none;
+  font-size: 1.2rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: all 0.3s;
+  z-index: 9000;
+  box-shadow: 0 4px 20px rgba(212, 160, 23, 0.3);
+}
+
+.back-to-top.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.back-to-top:hover {
+  background: var(--gold-light);
+  transform: translateY(-3px);
+}
+
+/* ============================================
+   CONNECTIONS SECTION
+   ============================================ */
+.connections-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+  margin: 2rem 0;
+}
+
+.connection-card {
+  background: var(--bg-panel);
+  border-radius: 8px;
+  padding: 1.5rem;
+  border: 1px solid rgba(212, 160, 23, 0.1);
+  transition: all 0.3s;
+}
+
+.connection-card:hover {
+  border-color: rgba(212, 160, 23, 0.3);
+  transform: translateY(-4px);
+}
+
+.connection-card h4 {
+  font-family: 'Shippori Mincho', serif;
+  font-size: 1rem;
+  color: var(--gold-light);
+  margin-bottom: 0.8rem;
+}
+
+.connection-card p {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  margin-bottom: 0;
+}
+
+/* ============================================
+   DEATH COMPARISON TABLE
+   ============================================ */
+.comparison-table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  margin: 2rem 0;
+  border-radius: 8px;
+  overflow: hidden;
+  border: 1px solid rgba(192, 57, 43, 0.2);
+}
+
+.comparison-table thead th {
+  background: rgba(192, 57, 43, 0.15);
+  padding: 1rem;
+  font-family: 'Shippori Mincho', serif;
+  font-weight: 700;
+  color: var(--crimson-light);
+  font-size: 0.9rem;
+}
+
+.comparison-table tbody td {
+  padding: 0.8rem 1rem;
+  border-bottom: 1px solid rgba(192, 57, 43, 0.08);
+  font-size: 0.9rem;
+}
+
+.comparison-table tbody tr:last-child td { border-bottom: none; }
+
+/* ============================================
+   RESPONSIVE
+   ============================================ */
+@media (max-width: 768px) {
+  .nav-links { display: none; }
+  .nav-toggle { display: block; }
+
+  .characters-grid {
+    grid-template-columns: 1fr;
+    max-width: 400px;
+  }
+
+  .connections-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .timeline::before { left: 20px; }
+
+  .timeline-item:nth-child(odd),
+  .timeline-item:nth-child(even) {
+    flex-direction: row;
+    padding-left: 50px;
+    padding-right: 0;
+    text-align: left;
+  }
+
+  .timeline-dot {
+    left: 20px;
+  }
+
+  .part-header { padding: 5rem 1.5rem; }
+
+  .conspiracy-layer {
+    flex-direction: column;
+  }
+}
+
+/* ============================================
+   ANIMATIONS
+   ============================================ */
+.fade-in {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.6s, transform 0.6s;
+}
+
+.fade-in.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Japanese brush stroke decoration */
+.brush-stroke {
+  display: block;
+  width: 120px;
+  height: 4px;
+  margin: 2rem auto;
+  background: linear-gradient(90deg, transparent, var(--gold), transparent);
+  border-radius: 2px;
+}
+
+/* Decorative vertical text */
+.vertical-text {
+  writing-mode: vertical-rl;
+  text-orientation: mixed;
+  font-family: 'Shippori Mincho', serif;
+  font-size: 0.8rem;
+  color: rgba(212, 160, 23, 0.15);
+  letter-spacing: 0.3em;
+  position: fixed;
+  right: 1.5rem;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 1;
+  pointer-events: none;
+}
+
+@media (max-width: 1024px) {
+  .vertical-text { display: none; }
+}
+</style>
+</head>
+<body>
+
+<!-- Reading Progress -->
+<div id="reading-progress"></div>
+
+<!-- Vertical decorative text -->
+<div class="vertical-text">幕末維新伝 ── 慶応三年 ── 近江屋事件</div>
+
+<!-- Navigation -->
+<nav class="nav" id="mainNav">
+  <div class="nav-inner">
+    <a href="#top" class="nav-brand">幕末維新伝</a>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="#characters">証言者</a></li>
+      <li><a href="#part1">龍馬の証言</a></li>
+      <li><a href="#part2">土方の証言</a></li>
+      <li><a href="#part3">近藤の証言</a></li>
+      <li><a href="#part4">大胆仮説</a></li>
+      <li><a href="#timeline-section">年表</a></li>
+    </ul>
+    <button class="nav-toggle" id="navToggle" aria-label="メニュー">
+      <i class="fas fa-bars"></i>
+    </button>
+  </div>
+</nav>
+
+<!-- ============================================
+     HERO
+     ============================================ -->
+<section class="hero" id="top">
+  <div class="hero-bg"></div>
+  <div class="hero-overlay"></div>
+  <div class="hero-particles" id="particles"></div>
+  <div class="hero-content">
+    <p class="hero-era">慶応三年十一月十五日</p>
+    <h1 class="hero-title">幕末に関しての<br>真相真理を暴く</h1>
+    <p class="hero-subtitle">坂本龍馬はなぜ暗殺されたのか。新選組との間に何があったのか。</p>
+    <p class="hero-quote">「慎太、わしは脳をやられた。もういかん」<br>── 坂本龍馬、最期の言葉</p>
+    <div class="hero-scroll">
+      <a href="#prologue">
+        <span>SCROLL</span>
+        <div class="scroll-arrow"></div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================
+     PROLOGUE
+     ============================================ -->
+<section class="content-section" id="prologue">
+  <div class="content-inner">
+    <div class="section-header" data-aos="fade-up">
+      <p class="section-label">PROLOGUE</p>
+      <h2 class="section-title">序章</h2>
+      <p class="part-subtitle">すべてが終わり、すべてが始まった夜</p>
+      <div class="section-divider"></div>
+    </div>
+
+    <p data-aos="fade-up">慶応三年（1867年）十一月十五日。京都・河原町の近江屋。醤油商の二階で、一人の男が血に沈んだ。</p>
+
+    <p data-aos="fade-up"><strong style="color: var(--gold-light);">坂本龍馬、三十三歳。</strong>奇しくもその日は誕生日であった。</p>
+
+    <p data-aos="fade-up">「十津川郷士」を名乗る刺客が踏み込み、額を一刀で割られた龍馬は、傍らの中岡慎太郎にこう言ったと伝わる。</p>
+
+    <div class="quote-block ryoma" data-aos="fade-up">
+      <div class="quote-text" style="font-size: 1.15rem; color: var(--sakura);">
+        「慎太、わしは脳をやられた。もういかん」
+      </div>
+    </div>
+
+    <p data-aos="fade-up">同席していた中岡慎太郎も瀕死の重傷を負い、二日後に絶命。薩長同盟の立役者にして大政奉還の仕掛け人、日本史上最も有名な「つなぎ役」は、こうして歴史の舞台から姿を消した。</p>
+
+    <p data-aos="fade-up">だが、百五十年以上経った今も、一つの問いが残り続けている。</p>
+
+    <div class="highlight-box" data-aos="fade-up">
+      <p>「誰が」龍馬を殺したのか。そして――「なぜ」殺さねばならなかったのか。</p>
+    </div>
+
+    <p data-aos="fade-up">本レポートでは、坂本龍馬本人、そして宿敵とされる新選組の近藤勇・土方歳三の三者の視点から、この歴史最大のミステリーに迫る。</p>
+  </div>
+</section>
+
+<!-- ============================================
+     CHARACTERS
+     ============================================ -->
+<section class="characters-section" id="characters">
+  <div class="section-header" data-aos="fade-up">
+    <p class="section-label">WITNESSES</p>
+    <h2 class="section-title">三人の証言者</h2>
+    <div class="section-divider"></div>
+  </div>
+
+  <div class="characters-grid">
+    <div class="character-card ryoma" data-aos="fade-up" data-aos-delay="0">
+      <img src="reference/character_ryoma.png" alt="坂本龍馬" class="character-img" loading="lazy">
+      <div class="character-info">
+        <h3 class="character-name">坂本龍馬</h3>
+        <p class="character-title-text">暗殺された当事者</p>
+        <p class="character-desc">土佐弁で己の死の真相を語る。薩長同盟の仲介者にして大政奉還の仕掛け人。三十三年の短い生涯で日本の未来を変えた男。</p>
+        <div class="character-tags">
+          <span class="tag">土佐藩脱藩浪士</span>
+          <span class="tag">海援隊隊長</span>
+          <span class="tag">北辰一刀流</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="character-card hijikata" data-aos="fade-up" data-aos-delay="150">
+      <img src="reference/character_hijikata.png" alt="土方歳三" class="character-img" loading="lazy">
+      <div class="character-info">
+        <h3 class="character-name">土方歳三</h3>
+        <p class="character-title-text">「鬼の副長」</p>
+        <p class="character-desc">新選組副長として京都の治安を守った鬼の目が、幕末の闇を暴く。箱館五稜郭まで戦い抜いた最後の武士。</p>
+        <div class="character-tags">
+          <span class="tag">新選組副長</span>
+          <span class="tag">鬼の副長</span>
+          <span class="tag">最後の武士</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="character-card kondo" data-aos="fade-up" data-aos-delay="300">
+      <img src="reference/character_kondo.png" alt="近藤勇" class="character-img" loading="lazy">
+      <div class="character-info">
+        <h3 class="character-name">近藤勇</h3>
+        <p class="character-title-text">新選組局長</p>
+        <p class="character-desc">武士の矜持をもって龍馬への複雑な想いを明かす。天然理心流四代目宗家。龍馬暗殺の嫌疑で板橋刑場に散った男。</p>
+        <div class="character-tags">
+          <span class="tag">新選組局長</span>
+          <span class="tag">天然理心流</span>
+          <span class="tag">板橋刑場</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================
+     PART 1: RYOMA'S TESTIMONY
+     ============================================ -->
+<div class="part-header" id="part1">
+  <div class="part-header-bg" style="background-image: url('images/01_part1_header.png');"></div>
+  <div class="part-header-overlay"></div>
+  <div class="part-header-content" data-aos="fade-up">
+    <p class="part-number">第一部</p>
+    <h2 class="part-title">坂本龍馬の証言</h2>
+    <p class="part-subtitle">「わしを殺したのは、誰じゃ」</p>
+  </div>
+</div>
+
+<section class="content-section">
+  <div class="content-inner">
+    <h2 data-aos="fade-up">一、四つの容疑者</h2>
+
+    <img src="images/14_four_suspects.png" alt="四つの容疑者" class="section-image" data-aos="fade-up" loading="lazy">
+    <p class="image-caption">四つの容疑者 ── 龍馬を取り囲む四方からの影</p>
+
+    <!-- 見廻組説 -->
+    <h3 data-aos="fade-up">見廻組 ── 実行犯としては、まず間違いない</h3>
+
+    <div class="quote-block ryoma" data-aos="fade-up">
+      <div class="quote-speaker ryoma">
+        <img src="reference/character_ryoma.png" alt="" class="quote-speaker-icon"> 龍馬
+      </div>
+      <div class="quote-text">「京都見廻組の佐々木只三郎、桂早之助、渡辺吉太郎、高橋安次郎。今井信郎が明治になって自白したことで、実行犯は見廻組の連中じゃったということになっちょる。あの夜の襲撃は手際がよすぎた。素人の仕業じゃない。わしの北辰一刀流の腕をもってしても、不意を突かれては太刀打ちできん」</div>
+    </div>
+
+    <div class="quote-block hijikata" data-aos="fade-up">
+      <div class="quote-speaker hijikata">
+        <img src="reference/character_hijikata.png" alt="" class="quote-speaker-icon"> 土方
+      </div>
+      <div class="quote-text">「見廻組の佐々木只三郎。あれが実行者だと俺は見ている。京都見廻組は幕府直参の精鋭だが、新選組とは別の組織だ。同じ『幕府側』というだけで一緒くたにされるのは、正直言って不愉快だ」</div>
+    </div>
+
+    <div class="quote-block kondo" data-aos="fade-up">
+      <div class="quote-speaker kondo">
+        <img src="reference/character_kondo.png" alt="" class="quote-speaker-icon"> 近藤
+      </div>
+      <div class="quote-text">「龍馬殿を斬った者たち――彼らもまた、自らの『大義』のために剣を振るったのであろう。だが、拙者に言わせれば、あの暗殺はあまりにも拙い。複数人で不意を襲い、逃げ場のない室内で斬りつけるとは、武士の風上にも置けぬ所業である」</div>
+    </div>
+
+    <div class="highlight-box" data-aos="fade-up">
+      <p>三者の結論: 実行犯は見廻組でほぼ確定。だが「誰が命じたか」が本当の問題。</p>
+    </div>
+
+    <span class="brush-stroke"></span>
+
+    <!-- 薩摩藩黒幕説 -->
+    <h3 data-aos="fade-up">薩摩藩黒幕説 ── 龍馬が一番疑っている「味方」</h3>
+
+    <div class="quote-block ryoma" data-aos="fade-up">
+      <div class="quote-speaker ryoma">
+        <img src="reference/character_ryoma.png" alt="" class="quote-speaker-icon"> 龍馬
+      </div>
+      <div class="quote-text">「正直に言おう。わしが一番疑うちょるのは、薩摩じゃ。大政奉還が成った後、わしたちの道は分かれた。薩摩は武力倒幕を望んでおった。わしの存在そのものが武力倒幕の障害になった。西郷どんを疑いたくはない。じゃが、大久保一蔵ならやりかねん、とわしの勘が言うちょる」</div>
+    </div>
+
+    <div class="quote-block hijikata" data-aos="fade-up">
+      <div class="quote-speaker hijikata">
+        <img src="reference/character_hijikata.png" alt="" class="quote-speaker-icon"> 土方
+      </div>
+      <div class="quote-text">「薩摩だ。西郷隆盛、大久保利通。あの二人は『大政奉還』では手ぬるいと考えていた。味方だと思っていた者に後ろから斬られる。それが幕末の恐ろしさだ」</div>
+    </div>
+
+    <div class="quote-block kondo" data-aos="fade-up">
+      <div class="quote-speaker kondo">
+        <img src="reference/character_kondo.png" alt="" class="quote-speaker-icon"> 近藤
+      </div>
+      <div class="quote-text">「龍馬殿が構想した『大政奉還』は、武力倒幕を志す薩摩の一部にとって最大の障害であった。龍馬殿が生きていれば、新政府は穏健な方向に進んだであろう。それを望まぬ者がいたとしても、不思議ではない」</div>
+    </div>
+
+    <div class="highlight-box verdict" data-aos="fade-up">
+      <p>驚愕ポイント: 敵対していたはずの三者全員が「薩摩黒幕説」で一致。龍馬を殺したのは敵ではなく「味方」だった可能性が最も高い。</p>
+    </div>
+
+    <span class="brush-stroke"></span>
+
+    <!-- 紀州藩説 -->
+    <h3 data-aos="fade-up">紀州藩説 ── いろは丸事件の怨恨</h3>
+
+    <div class="quote-block ryoma" data-aos="fade-up">
+      <div class="quote-speaker ryoma">
+        <img src="reference/character_ryoma.png" alt="" class="quote-speaker-icon"> 龍馬
+      </div>
+      <div class="quote-text">「いろは丸が紀州藩の『明光丸』と衝突して沈没した件じゃ。わしは国際法を持ち出して紀州藩に巨額の賠償金を払わせた。紀州藩がわしを恨んでおったのは間違いない。ただ、『実行は見廻組、資金は紀州藩、黒幕は薩摩』という複合説があるとすれば――これが真相に一番近いかもしれん」</div>
+    </div>
+
+    <span class="brush-stroke"></span>
+
+    <!-- 新選組説 -->
+    <h3 data-aos="fade-up">新選組説 ── これは全員が否定</h3>
+
+    <div class="quote-block ryoma" data-aos="fade-up">
+      <div class="quote-speaker ryoma">
+        <img src="reference/character_ryoma.png" alt="" class="quote-speaker-icon"> 龍馬
+      </div>
+      <div class="quote-text">「新選組の近藤勇は否定しちょった。それに、あの夜の襲撃の手口は新選組のやり方とは違う。『十津川郷士』と偽って忍び込むような真似は、土方さんの美学に反するじゃろう」</div>
+    </div>
+
+    <div class="quote-block hijikata" data-aos="fade-up">
+      <div class="quote-speaker hijikata">
+        <img src="reference/character_hijikata.png" alt="" class="quote-speaker-icon"> 土方
+      </div>
+      <div class="quote-text">「――馬鹿を言うな。暗殺などという卑怯な手段は、俺たちの流儀ではない。斬るなら正面から名乗り、堂々と斬る。それが新選組だ」</div>
+    </div>
+
+    <div class="quote-block kondo" data-aos="fade-up">
+      <div class="quote-speaker kondo">
+        <img src="reference/character_kondo.png" alt="" class="quote-speaker-icon"> 近藤
+      </div>
+      <div class="quote-text">「新選組には新選組の法度がある。あの夜、近江屋に踏み込んだ者どもは松山弁を使ったという。新選組の隊士に伊予出身の者がどれほどいた？」</div>
+    </div>
+
+    <div class="highlight-box" data-aos="fade-up">
+      <p>三者の結論: 新選組の関与は完全否定。にもかかわらず近藤勇がこの嫌疑で処刑された悲劇。</p>
+    </div>
+
+    <span class="brush-stroke"></span>
+
+    <!-- 船中八策 -->
+    <h2 data-aos="fade-up">二、龍馬が描いた「船中八策」</h2>
+
+    <img src="images/02_funchu_hassaku.png" alt="船中八策" class="section-image" data-aos="fade-up" loading="lazy">
+    <p class="image-caption">船中八策 ── 大海原に立つ龍馬のビジョン</p>
+
+    <p data-aos="fade-up">慶応三年六月、龍馬は土佐藩船「夕顔」の船上で後藤象二郎に新しい日本の設計図を語った。</p>
+
+    <table class="data-table" data-aos="fade-up">
+      <thead>
+        <tr>
+          <th>船中八策の項目</th>
+          <th>現代の言葉で言えば</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td class="highlight-cell">天下の政権を朝廷に奉還</td><td>政権交代</td></tr>
+        <tr><td class="highlight-cell">上下議政局を設置</td><td>議会制民主主義</td></tr>
+        <tr><td class="highlight-cell">有材の人材を登用</td><td>能力主義・身分制度の撤廃</td></tr>
+        <tr><td class="highlight-cell">外国との交際を公議で決定</td><td>国際法に基づく外交</td></tr>
+        <tr><td class="highlight-cell">新たに大典を撰定</td><td>憲法の制定</td></tr>
+        <tr><td class="highlight-cell">海軍を拡張</td><td>国防力の強化</td></tr>
+        <tr><td class="highlight-cell">御親兵を置く</td><td>国軍の創設</td></tr>
+        <tr><td class="highlight-cell">金銀物貨の比率を平均</td><td>統一通貨・為替制度</td></tr>
+      </tbody>
+    </table>
+
+    <div class="quote-block ryoma" data-aos="fade-up">
+      <div class="quote-speaker ryoma">
+        <img src="reference/character_ryoma.png" alt="" class="quote-speaker-icon"> 龍馬
+      </div>
+      <div class="quote-text">「つまり、わしの構想は『すべての人にとって少しずつ都合が悪い』ものじゃった。完全な味方がおらん代わりに、完全な敵もおらんはずじゃった。じゃが、『少しずつ都合が悪い』が積み重なると、『龍馬さえおらねば』という空気が醸成される。それが、わしの死の本質じゃと思う」</div>
+    </div>
+
+    <div class="quote-block kondo" data-aos="fade-up">
+      <div class="quote-speaker kondo">
+        <img src="reference/character_kondo.png" alt="" class="quote-speaker-icon"> 近藤
+      </div>
+      <div class="quote-text">「拙者が剣を振るっている間に、龍馬殿はすでに明治の日本を構想しておられた。天下を論じる器の大きさでは、到底かなわぬ」</div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================
+     PART 2: HIJIKATA'S TESTIMONY
+     ============================================ -->
+<div class="part-header" id="part2">
+  <div class="part-header-bg" style="background-image: url('images/05_part2_header.png');"></div>
+  <div class="part-header-overlay"></div>
+  <div class="part-header-content" data-aos="fade-up">
+    <p class="part-number">第二部</p>
+    <h2 class="part-title">土方歳三の証言</h2>
+    <p class="part-subtitle">「鬼の副長」が見た闇</p>
+  </div>
+</div>
+
+<section class="content-section">
+  <div class="content-inner">
+    <h2 data-aos="fade-up">三、油小路の変と龍馬暗殺</h2>
+
+    <img src="images/06_aburanokoji.png" alt="油小路の変" class="section-image" data-aos="fade-up" loading="lazy">
+    <p class="image-caption">油小路の変 ── 三日間で起きた二つの暗殺</p>
+
+    <div class="quote-block hijikata" data-aos="fade-up">
+      <div class="quote-speaker hijikata">
+        <img src="reference/character_hijikata.png" alt="" class="quote-speaker-icon"> 土方
+      </div>
+      <div class="quote-text">「世間があまり語らない事実がある。油小路の変は十一月十八日。龍馬暗殺はその三日前の十一月十五日だ」</div>
+    </div>
+
+    <p data-aos="fade-up">土方は、この二つの事件が一本の糸で繋がっていると指摘する。</p>
+
+    <div class="quote-block hijikata" data-aos="fade-up">
+      <div class="quote-speaker hijikata">
+        <img src="reference/character_hijikata.png" alt="" class="quote-speaker-icon"> 土方
+      </div>
+      <div class="quote-text">「伊東甲子太郎は龍馬と同じく、『武力によらない政権交代』を模索していた。龍馬暗殺と油小路の変は、別々の事件のように見えて、実は繋がっている。『旧体制を壊す者』を排除する――その大きな流れの中で、龍馬も伊東も消された」</div>
+    </div>
+
+    <div class="highlight-box verdict" data-aos="fade-up">
+      <p>バズりポイント: わずか3日の間に、「穏健派」の二人が立て続けに消されている。偶然か？ それとも計画的な「穏健派一掃作戦」だったのか？</p>
+    </div>
+
+    <span class="brush-stroke"></span>
+
+    <!-- 後藤象二郎 -->
+    <h2 data-aos="fade-up">四、後藤象二郎の疑惑</h2>
+
+    <img src="images/07_goto_suspicion.png" alt="後藤象二郎の疑惑" class="section-image" data-aos="fade-up" loading="lazy">
+    <p class="image-caption">「龍馬を守らなかった男」── 後藤象二郎の疑惑</p>
+
+    <p data-aos="fade-up">ここで土方歳三が投下する爆弾がある。</p>
+
+    <div class="quote-block hijikata" data-aos="fade-up">
+      <div class="quote-speaker hijikata">
+        <img src="reference/character_hijikata.png" alt="" class="quote-speaker-icon"> 土方
+      </div>
+      <div class="quote-text">「龍馬を守るはずの土佐藩が、妙に動きが鈍い。大政奉還を成功させた功労者を放っておくはずがない。それなのに、土佐藩は龍馬に十分な護衛をつけなかった。なぜか。後藤象二郎だ」</div>
+    </div>
+
+    <div class="quote-block hijikata" data-aos="fade-up">
+      <div class="quote-speaker hijikata">
+        <img src="reference/character_hijikata.png" alt="" class="quote-speaker-icon"> 土方
+      </div>
+      <div class="quote-text">「大政奉還の建白書を書いたのは後藤だが、実際のアイデアは龍馬のものだ。後藤は龍馬の功績を自分のものにしたかった。龍馬が生きていれば、新政府で後藤より上の地位に就く可能性があった」</div>
+    </div>
+
+    <div class="quote-block hijikata" data-aos="fade-up">
+      <div class="quote-speaker hijikata">
+        <img src="reference/character_hijikata.png" alt="" class="quote-speaker-icon"> 土方
+      </div>
+      <div class="quote-text">「俺は断言はしない。だが、『龍馬を守らなかった』ことと『龍馬を殺した』ことの間には、そう大きな距離はない」</div>
+    </div>
+
+    <div class="highlight-box verdict" data-aos="fade-up">
+      <p>衝撃の指摘: 龍馬を殺したのは刺客の刃だけではない。「守らなかった」味方もまた共犯者だった。</p>
+    </div>
+
+    <span class="brush-stroke"></span>
+
+    <!-- 松平容保 -->
+    <h2 data-aos="fade-up">五、松平容保の暗黙の了承</h2>
+
+    <div class="quote-block hijikata" data-aos="fade-up">
+      <div class="quote-speaker hijikata">
+        <img src="reference/character_hijikata.png" alt="" class="quote-speaker-icon"> 土方
+      </div>
+      <div class="quote-text">「龍馬暗殺の実行犯とされる佐々木只三郎は、会津藩と深い繋がりがあった。容保公が知らぬところで見廻組が勝手に動くとは考えにくい。少なくとも、暗黙の了承はあったのではないか」</div>
+    </div>
+
+    <div class="quote-block hijikata" data-aos="fade-up">
+      <div class="quote-speaker hijikata">
+        <img src="reference/character_hijikata.png" alt="" class="quote-speaker-icon"> 土方
+      </div>
+      <div class="quote-text">「もしそうだとすれば――俺たち新選組は、主君の命で龍馬を守ることも、斬ることもできた立場にいた。だが実際には、何もしなかった。何も知らされなかった。それが、俺には一番堪える」</div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================
+     PART 3: KONDO'S TESTIMONY
+     ============================================ -->
+<div class="part-header" id="part3">
+  <div class="part-header-bg" style="background-image: url('images/10_part3_header.png');"></div>
+  <div class="part-header-overlay"></div>
+  <div class="part-header-content" data-aos="fade-up">
+    <p class="part-number">第三部</p>
+    <h2 class="part-title">近藤勇の証言</h2>
+    <p class="part-subtitle">武士の魂から見た真実</p>
+  </div>
+</div>
+
+<section class="content-section">
+  <div class="content-inner">
+    <h2 data-aos="fade-up">六、池田屋事件の真実</h2>
+
+    <img src="images/11_ikedaya.png" alt="池田屋事件" class="section-image" data-aos="fade-up" loading="lazy">
+    <p class="image-caption">池田屋事件 ── 斬り込む新選組</p>
+
+    <div class="quote-block kondo" data-aos="fade-up">
+      <div class="quote-speaker kondo">
+        <img src="reference/character_kondo.png" alt="" class="quote-speaker-icon"> 近藤
+      </div>
+      <div class="quote-text">「池田屋で捕縛した者たちの所持品の中に、土佐藩関係者との書簡が含まれておった。龍馬殿の名が直接記されていたわけではない。だが、あの方の周囲にいた土佐勤王党の残党たちが、池田屋の密議に何らかの形で関与していた痕跡は確かにあった」</div>
+    </div>
+
+    <div class="quote-block kondo" data-aos="fade-up">
+      <div class="quote-speaker kondo">
+        <img src="reference/character_kondo.png" alt="" class="quote-speaker-icon"> 近藤
+      </div>
+      <div class="quote-text">「龍馬殿が池田屋にいなかったのは事実であろう。だが、『池田屋の密議とは無関係だった』とまでは、拙者には言い切れぬ。あの方が知らなかったはずがない」</div>
+    </div>
+
+    <div class="highlight-box" data-aos="fade-up">
+      <p>新解釈: 龍馬は池田屋の計画を知りつつ「あえて距離を置いた」。暴発を良しとしない冷静な判断力こそが、後の薩長同盟を成し遂げる真骨頂だった。</p>
+    </div>
+
+    <span class="brush-stroke"></span>
+
+    <!-- 秘密の接点 -->
+    <h2 data-aos="fade-up">七、新選組と龍馬の「秘密の接点」</h2>
+
+    <img src="images/12_secret_connections.png" alt="秘密の接点" class="section-image" data-aos="fade-up" loading="lazy">
+    <p class="image-caption">夜の京都に張り巡らされた情報ネットワーク</p>
+
+    <p data-aos="fade-up">近藤勇は、新選組と龍馬の間に存在した三つの隠された接点を明かす。</p>
+
+    <div class="connections-grid" data-aos="fade-up">
+      <div class="connection-card">
+        <h4><i class="fas fa-user-group" style="margin-right:0.5rem;color:var(--gold);"></i>接点1</h4>
+        <p>土佐藩出身の新選組隊士を通じて、龍馬の動向が断片的に伝わっていた。</p>
+      </div>
+      <div class="connection-card">
+        <h4><i class="fas fa-handshake" style="margin-right:0.5rem;color:var(--gold);"></i>接点2</h4>
+        <p>勝海舟という「共通の師」。勝の口から「坂本という土佐の男は面白い」と聞いた。</p>
+      </div>
+      <div class="connection-card">
+        <h4><i class="fas fa-eye" style="margin-right:0.5rem;color:var(--gold);"></i>接点3</h4>
+        <p>永倉新八によれば、龍馬は新選組の動きを知らせる情報源を持っていた。</p>
+      </div>
+    </div>
+
+    <div class="highlight-box" data-aos="fade-up">
+      <p>バズりポイント: 新選組と龍馬は「敵対」しながらも、見えない情報のネットワークでつながっていた。幕末の京都は、表の「斬り合い」の下に、裏の「情報戦」が渦巻いていた。</p>
+    </div>
+
+    <span class="brush-stroke"></span>
+
+    <!-- 二つの死の対比 -->
+    <h2 data-aos="fade-up">八、近藤勇の処刑と龍馬暗殺</h2>
+
+    <img src="images/13_two_deaths.png" alt="二つの死の対比" class="section-image" data-aos="fade-up" loading="lazy">
+    <p class="image-caption">二つの死の対比 ── 龍馬と近藤、桜吹雪の中で</p>
+
+    <table class="comparison-table" data-aos="fade-up">
+      <thead>
+        <tr>
+          <th></th>
+          <th>坂本龍馬の死</th>
+          <th>近藤勇の死</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td style="font-weight:700;color:var(--gold-light);">手段</td>
+          <td>暗殺（正規の手続きなし）</td>
+          <td>斬首（武士としての切腹すら不許可）</td>
+        </tr>
+        <tr>
+          <td style="font-weight:700;color:var(--gold-light);">目的</td>
+          <td>口封じ（穏健派の排除）</td>
+          <td>口封じ（幕府の正当性の問題）</td>
+        </tr>
+        <tr>
+          <td style="font-weight:700;color:var(--gold-light);">結果</td>
+          <td>真相が闇に葬られた</td>
+          <td>処刑の経緯が曖昧なまま</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="quote-block kondo" data-aos="fade-up">
+      <div class="quote-speaker kondo">
+        <img src="reference/character_kondo.png" alt="" class="quote-speaker-icon"> 近藤
+      </div>
+      <div class="quote-text">「龍馬殿と拙者。立場は違えど、時代の歯車に巻き込まれ、『不要』と判断された瞬間に命を奪われた。この共通点に、幕末という時代の本質が凝縮されておる」</div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================
+     PART 4: BOLD HYPOTHESES
+     ============================================ -->
+<div class="part-header" id="part4">
+  <div class="part-header-bg" style="background-image: url('images/03_hypothesis.png');"></div>
+  <div class="part-header-overlay"></div>
+  <div class="part-header-content" data-aos="fade-up">
+    <p class="part-number">第四部</p>
+    <h2 class="part-title">三者の大胆仮説</h2>
+    <p class="part-subtitle">「実はこうだったのでは？」</p>
+  </div>
+</div>
+
+<section class="content-section">
+  <div class="content-inner">
+    <h3 data-aos="fade-up">仮説1: 大政奉還の成功が「龍馬の死刑執行令」だった</h3>
+
+    <div class="quote-block ryoma" data-aos="fade-up">
+      <div class="quote-speaker ryoma">
+        <img src="reference/character_ryoma.png" alt="" class="quote-speaker-icon"> 龍馬
+      </div>
+      <div class="quote-text">「大政奉還が成ったのは十月十四日。わしが殺されたのはその約一ヶ月後。薩摩にとっては、わしの存在そのものが武力倒幕の障害になった。成功しすぎた改革者は、次の改革者にとって邪魔になる――これが歴史の冷酷な法則かもしれん」</div>
+    </div>
+
+    <span class="brush-stroke"></span>
+
+    <h3 data-aos="fade-up">仮説2: 龍馬は「日本初の商社マン」として消された</h3>
+
+    <div class="quote-block ryoma" data-aos="fade-up">
+      <div class="quote-speaker ryoma">
+        <img src="reference/character_ryoma.png" alt="" class="quote-speaker-icon"> 龍馬
+      </div>
+      <div class="quote-text">「わしは政治家であると同時にビジネスマンじゃった。外国との独自ルートを持ち、軍事力（海援隊）も持ち、政治的影響力も持つ男が、自由経済の世界に乗り込んでくる。『龍馬の経済的ネットワークを潰す』という意図もあったのではないか」</div>
+    </div>
+
+    <span class="brush-stroke"></span>
+
+    <h3 data-aos="fade-up">仮説3: 「穏健派一掃作戦」が実行された</h3>
+
+    <div class="quote-block hijikata" data-aos="fade-up">
+      <div class="quote-speaker hijikata">
+        <img src="reference/character_hijikata.png" alt="" class="quote-speaker-icon"> 土方
+      </div>
+      <div class="quote-text">「龍馬暗殺と油小路の変は一本の糸で繋がっている。『武力によらない政権交代』を目指す者たちが、三日間で立て続けに排除された。これが偶然のはずがない」</div>
+    </div>
+
+    <span class="brush-stroke"></span>
+
+    <h3 data-aos="fade-up">仮説4: 「複合犯行」── 実行・資金・黒幕の三層構造</h3>
+
+    <p data-aos="fade-up">三者の証言を総合すると、龍馬暗殺の最も蓋然性の高いシナリオが浮かび上がる。</p>
+
+    <div class="conspiracy-diagram" data-aos="fade-up">
+      <h4 class="conspiracy-title"><i class="fas fa-triangle-exclamation" style="margin-right:0.5rem;"></i> 龍馬暗殺の三層構造</h4>
+
+      <div class="conspiracy-badge execution">
+        <i class="fas fa-skull-crossbones" style="margin-right:0.5rem;"></i>
+        【実行】京都見廻組（佐々木只三郎ら）
+      </div>
+      <div class="conspiracy-arrow"><i class="fas fa-arrow-down"></i></div>
+      <p class="conspiracy-label">命令 or 暗黙の了承</p>
+
+      <div class="conspiracy-badge middle">
+        <i class="fas fa-landmark" style="margin-right:0.5rem;"></i>
+        【中間】会津藩・松平容保 ＋ 紀州藩
+      </div>
+      <div class="conspiracy-arrow"><i class="fas fa-arrow-down"></i></div>
+      <p class="conspiracy-label">黙認 or 情報共有</p>
+
+      <div class="conspiracy-badge mastermind">
+        <i class="fas fa-chess-king" style="margin-right:0.5rem;"></i>
+        【黒幕】薩摩藩強硬派 ＋ 土佐藩・後藤象二郎
+      </div>
+    </div>
+
+    <div class="quote-block hijikata" data-aos="fade-up">
+      <div class="quote-speaker hijikata">
+        <img src="reference/character_hijikata.png" alt="" class="quote-speaker-icon"> 土方
+      </div>
+      <div class="quote-text">「龍馬を殺したのは見廻組の刃かもしれない。だが、その刃を研いだのは、幕府と薩長の両方だ。そして、龍馬を守るべきだった土佐藩は、その刃を止めなかった」</div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================
+     PART 5: AFTERMATH
+     ============================================ -->
+<div class="part-header" id="part5">
+  <div class="part-header-bg" style="background-image: url('images/08_boshin_war.png');"></div>
+  <div class="part-header-overlay"></div>
+  <div class="part-header-content" data-aos="fade-up">
+    <p class="part-number">第五部</p>
+    <h2 class="part-title">龍馬が死んだ後に<br>起きたこと</h2>
+    <p class="part-subtitle">三者が見た「もう一つの歴史」</p>
+  </div>
+</div>
+
+<section class="content-section">
+  <div class="content-inner">
+    <h2 data-aos="fade-up">龍馬がいれば、戊辰戦争は起きなかった？</h2>
+
+    <div class="quote-block hijikata" data-aos="fade-up">
+      <div class="quote-speaker hijikata">
+        <img src="reference/character_hijikata.png" alt="" class="quote-speaker-icon"> 土方
+      </div>
+      <div class="quote-text">「箱館の五稜郭で俺が見たもの。それは、幕府も新政府も関係ない、『日本人同士が殺し合う』という地獄だった。龍馬が防ごうとしたのは、まさにこれだったのではないか」</div>
+    </div>
+
+    <div class="quote-block kondo" data-aos="fade-up">
+      <div class="quote-speaker kondo">
+        <img src="reference/character_kondo.png" alt="" class="quote-speaker-icon"> 近藤
+      </div>
+      <div class="quote-text">「龍馬殿が生きていれば、鳥羽伏見の戦いは起きなかったかもしれぬ。戊辰戦争も、箱館戦争も」</div>
+    </div>
+
+    <div class="quote-block ryoma" data-aos="fade-up">
+      <div class="quote-speaker ryoma">
+        <img src="reference/character_ryoma.png" alt="" class="quote-speaker-icon"> 龍馬
+      </div>
+      <div class="quote-text">「明治維新は成し遂げられた。じゃが、わしが望んだのは『血を流さない革命』じゃった。わしが死んだ後、日本は戦の道を選んだ。それだけが心残りじゃ」</div>
+    </div>
+
+    <div class="highlight-box verdict" data-aos="fade-up">
+      <p>歴史のIF: 龍馬が生きていれば、戊辰戦争（死者約8,200人）は回避でき、徳川も含めた合議制の新政府が誕生していた可能性がある。龍馬の死は、単なる一個人の暗殺ではなく、「平和的解決」という選択肢そのものの暗殺だった。</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================
+     TIMELINE
+     ============================================ -->
+<section class="timeline-section" id="timeline-section">
+  <div class="section-header" data-aos="fade-up">
+    <p class="section-label">TIMELINE</p>
+    <h2 class="section-title">幕末龍馬暗殺タイムライン</h2>
+    <p class="part-subtitle">1864年 ── 1869年 激動の5年間</p>
+    <div class="section-divider"></div>
+  </div>
+
+  <img src="images/09_timeline.png" alt="幕末年表" class="section-image" style="max-width:860px;margin:0 auto 3rem;display:block;" data-aos="fade-up" loading="lazy">
+
+  <div class="timeline">
+    <div class="timeline-item" data-aos="fade-right">
+      <div class="timeline-dot"></div>
+      <div>
+        <p class="timeline-date">1864年6月5日</p>
+        <p class="timeline-event">池田屋事件</p>
+        <p class="timeline-desc">新選組が尊攘派を急襲。龍馬は不在だが関係者あり</p>
+      </div>
+    </div>
+
+    <div class="timeline-item" data-aos="fade-left">
+      <div class="timeline-dot"></div>
+      <div>
+        <p class="timeline-date">1866年1月21日</p>
+        <p class="timeline-event">薩長同盟 成立</p>
+        <p class="timeline-desc">龍馬が仲介し、犬猿の仲だった薩摩と長州を結びつけた</p>
+      </div>
+    </div>
+
+    <div class="timeline-item" data-aos="fade-right">
+      <div class="timeline-dot"></div>
+      <div>
+        <p class="timeline-date">1866年1月23日</p>
+        <p class="timeline-event">寺田屋事件</p>
+        <p class="timeline-desc">龍馬が伏見奉行所に襲われる。お龍が危機を知らせる</p>
+      </div>
+    </div>
+
+    <div class="timeline-item" data-aos="fade-left">
+      <div class="timeline-dot"></div>
+      <div>
+        <p class="timeline-date">1867年6月</p>
+        <p class="timeline-event">船中八策</p>
+        <p class="timeline-desc">後藤象二郎に新日本の設計図を提案</p>
+      </div>
+    </div>
+
+    <div class="timeline-item" data-aos="fade-right">
+      <div class="timeline-dot"></div>
+      <div>
+        <p class="timeline-date">1867年10月14日</p>
+        <p class="timeline-event">大政奉還</p>
+        <p class="timeline-desc">龍馬の構想が実現。徳川幕府が政権を朝廷に返上</p>
+      </div>
+    </div>
+
+    <div class="timeline-item critical" data-aos="fade-left">
+      <div class="timeline-dot"></div>
+      <div>
+        <p class="timeline-date" style="color:var(--crimson-light);">1867年11月15日</p>
+        <p class="timeline-event" style="color:var(--crimson-light);">龍馬暗殺（近江屋事件）</p>
+        <p class="timeline-desc">三十三歳の誕生日に凶刃に倒れる</p>
+      </div>
+    </div>
+
+    <div class="timeline-item critical" data-aos="fade-right">
+      <div class="timeline-dot"></div>
+      <div>
+        <p class="timeline-date" style="color:var(--crimson-light);">1867年11月18日</p>
+        <p class="timeline-event" style="color:var(--crimson-light);">油小路の変</p>
+        <p class="timeline-desc">龍馬暗殺のわずか3日後に伊東甲子太郎が暗殺される</p>
+      </div>
+    </div>
+
+    <div class="timeline-item" data-aos="fade-left">
+      <div class="timeline-dot"></div>
+      <div>
+        <p class="timeline-date">1868年1月3日</p>
+        <p class="timeline-event">鳥羽・伏見の戦い 勃発</p>
+        <p class="timeline-desc">龍馬が防ごうとした戦争が始まる</p>
+      </div>
+    </div>
+
+    <div class="timeline-item critical" data-aos="fade-right">
+      <div class="timeline-dot"></div>
+      <div>
+        <p class="timeline-date" style="color:var(--crimson-light);">1868年4月25日</p>
+        <p class="timeline-event" style="color:var(--crimson-light);">近藤勇 斬首</p>
+        <p class="timeline-desc">板橋刑場にて。龍馬暗殺の嫌疑も一因</p>
+      </div>
+    </div>
+
+    <div class="timeline-item critical" data-aos="fade-left">
+      <div class="timeline-dot"></div>
+      <div>
+        <p class="timeline-date" style="color:var(--crimson-light);">1869年5月11日</p>
+        <p class="timeline-event" style="color:var(--crimson-light);">土方歳三 戦死</p>
+        <p class="timeline-desc">箱館・五稜郭にて。最後の武士の最期</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================
+     EPILOGUE
+     ============================================ -->
+<section class="epilogue-section" id="epilogue">
+  <div class="section-header" data-aos="fade-up">
+    <p class="section-label">EPILOGUE</p>
+    <h2 class="section-title">終章 ── 三人の遺言</h2>
+    <div class="section-divider"></div>
+  </div>
+
+  <img src="images/04_epilogue.png" alt="三人の約束" class="section-image" style="max-width:860px;margin:0 auto 3rem;display:block;" data-aos="fade-up" loading="lazy">
+  <p class="image-caption">月下の桜の下で酒を酌み交わす三人の武士</p>
+
+  <div style="max-width:860px;margin:0 auto;">
+    <!-- 龍馬の遺言 -->
+    <div class="quote-block ryoma" data-aos="fade-up" style="text-align:left;margin-bottom:2rem;">
+      <div class="quote-speaker ryoma">
+        <img src="reference/character_ryoma.png" alt="" class="quote-speaker-icon"> 坂本龍馬
+      </div>
+      <div class="quote-text">「わしを殺した犯人が誰であれ、わしの夢は死ななかった。『船中八策』の精神は五箇条の御誓文に受け継がれた。近藤さん、土方さん。あんたたちが守ろうとした『武士の世』は終わったけんど、あんたたちの『信念を貫く』という生き様は、新しい時代にも語り継がれちょる。わしらは敵同士じゃったかもしれんが、『日本のために命を懸けた』という点では、同じ船に乗っちょったのかもしれんの。<br><br>世界の海援隊でもやりますかの」</div>
+    </div>
+
+    <!-- 土方の遺言 -->
+    <div class="quote-block hijikata" data-aos="fade-up" style="text-align:left;margin-bottom:2rem;">
+      <div class="quote-speaker hijikata">
+        <img src="reference/character_hijikata.png" alt="" class="quote-speaker-icon"> 土方歳三
+      </div>
+      <div class="quote-text">「近藤さんは『忠義』に殉じた。龍馬は『理想』に殉じた。俺は？ 俺は『意地』だ。<br><br>だが、もし来世というものがあるなら――龍馬と酒を酌み交わしてみたい。あの男の見ていた『もう一つの日本』について、夜通し語り合ってみたい。それは、鬼の副長には似合わん願いかもしれんがな」</div>
+    </div>
+
+    <!-- 近藤の遺言 -->
+    <div class="quote-block kondo" data-aos="fade-up" style="text-align:left;margin-bottom:3rem;">
+      <div class="quote-speaker kondo">
+        <img src="reference/character_kondo.png" alt="" class="quote-speaker-icon"> 近藤勇
+      </div>
+      <div class="quote-text">「もし生まれ変わることがあるならば、拙者は一度、龍馬殿と酒を酌み交わしてみたい。剣の話ではなく、『日本の未来』について語り合ってみたい。拙者の見識では、おそらく龍馬殿の話についていくのがやっとであろう。だが、それでも構わぬ。<br><br>龍馬殿の死は、日本が近代国家になるために払った、あまりにも大きな代償であった」</div>
+    </div>
+  </div>
+
+  <span class="brush-stroke" data-aos="fade-up"></span>
+
+  <div class="epilogue-final" data-aos="fade-up">
+    三人の武士が、時を超えて一つだけ合意したこと。<br><br>
+    <span style="font-size:1.5em;">「来世で龍馬と酒を飲みたい」</span>
+  </div>
+  <p class="epilogue-subtitle" data-aos="fade-up">――敵も味方も関係ない。命を懸けて時代を駆け抜けた者同士の、最も美しい約束。</p>
+</section>
+
+<!-- ============================================
+     FOOTER
+     ============================================ -->
+<footer class="footer">
+  <p>2026年2月7日 作成</p>
+  <p class="credits">Generated by Claude Code Agent Teams &mdash; bakumatsu-shinsou + bakumatsu-illustrators</p>
+  <p class="credits">Illustrations by Gemini 3 Pro Image Preview (Nano Banana Pro)</p>
+  <p class="credits" style="margin-top:0.5rem;">HTML Visualization by Claude Opus 4.6</p>
+</footer>
+
+<!-- Back to Top -->
+<button class="back-to-top" id="backToTop" aria-label="トップに戻る">
+  <i class="fas fa-arrow-up"></i>
+</button>
+
+<!-- Lightbox -->
+<div class="lightbox" id="lightbox">
+  <button class="lightbox-close" aria-label="閉じる"><i class="fas fa-times"></i></button>
+  <img src="" alt="">
+</div>
+
+<!-- ============================================
+     SCRIPTS
+     ============================================ -->
+<!-- AOS -->
+<script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
+
+<!-- GSAP -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+
+<script>
+// ============================================
+// Initialize AOS
+// ============================================
+AOS.init({
+  duration: 800,
+  easing: 'ease-out-cubic',
+  once: true,
+  offset: 80
+});
+
+// ============================================
+// Cherry Blossom Petals
+// ============================================
+(function createPetals() {
+  const container = document.getElementById('particles');
+  if (!container) return;
+  const count = 25;
+
+  for (let i = 0; i < count; i++) {
+    const petal = document.createElement('div');
+    petal.className = 'petal';
+    petal.style.left = Math.random() * 100 + '%';
+    petal.style.animationDuration = (8 + Math.random() * 12) + 's';
+    petal.style.animationDelay = Math.random() * 10 + 's';
+    petal.style.width = (5 + Math.random() * 8) + 'px';
+    petal.style.height = petal.style.width;
+    petal.style.opacity = 0.2 + Math.random() * 0.4;
+    container.appendChild(petal);
+  }
+})();
+
+// ============================================
+// Reading Progress Bar
+// ============================================
+(function readingProgress() {
+  const bar = document.getElementById('reading-progress');
+  window.addEventListener('scroll', function () {
+    const scrollTop = window.scrollY;
+    const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+    const progress = (scrollTop / docHeight) * 100;
+    bar.style.width = progress + '%';
+  });
+})();
+
+// ============================================
+// Navigation Scroll Effect
+// ============================================
+(function navScroll() {
+  const nav = document.getElementById('mainNav');
+  window.addEventListener('scroll', function () {
+    if (window.scrollY > 100) {
+      nav.classList.add('scrolled');
+    } else {
+      nav.classList.remove('scrolled');
+    }
+  });
+})();
+
+// ============================================
+// Active Nav Link
+// ============================================
+(function activeNavLink() {
+  const sections = document.querySelectorAll('[id]');
+  const navLinks = document.querySelectorAll('.nav-links a');
+
+  window.addEventListener('scroll', function () {
+    let current = '';
+    sections.forEach(function (section) {
+      const sectionTop = section.offsetTop - 200;
+      if (window.scrollY >= sectionTop) {
+        current = section.getAttribute('id');
+      }
+    });
+
+    navLinks.forEach(function (link) {
+      link.classList.remove('active');
+      if (link.getAttribute('href') === '#' + current) {
+        link.classList.add('active');
+      }
+    });
+  });
+})();
+
+// ============================================
+// Mobile Nav Toggle
+// ============================================
+(function mobileNav() {
+  const toggle = document.getElementById('navToggle');
+  const links = document.getElementById('navLinks');
+
+  toggle.addEventListener('click', function () {
+    if (links.style.display === 'flex') {
+      links.style.display = 'none';
+    } else {
+      links.style.display = 'flex';
+      links.style.flexDirection = 'column';
+      links.style.position = 'absolute';
+      links.style.top = '64px';
+      links.style.left = '0';
+      links.style.right = '0';
+      links.style.background = 'rgba(10, 10, 18, 0.98)';
+      links.style.padding = '1rem 2rem';
+      links.style.gap = '1rem';
+      links.style.borderBottom = '1px solid rgba(212, 160, 23, 0.15)';
+    }
+  });
+
+  // Close menu on link click
+  links.querySelectorAll('a').forEach(function (link) {
+    link.addEventListener('click', function () {
+      if (window.innerWidth <= 768) {
+        links.style.display = 'none';
+      }
+    });
+  });
+})();
+
+// ============================================
+// Back to Top
+// ============================================
+(function backToTop() {
+  const btn = document.getElementById('backToTop');
+
+  window.addEventListener('scroll', function () {
+    if (window.scrollY > 600) {
+      btn.classList.add('visible');
+    } else {
+      btn.classList.remove('visible');
+    }
+  });
+
+  btn.addEventListener('click', function () {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  });
+})();
+
+// ============================================
+// Image Lightbox
+// ============================================
+(function lightbox() {
+  const lb = document.getElementById('lightbox');
+  const lbImg = lb.querySelector('img');
+  const lbClose = lb.querySelector('.lightbox-close');
+
+  document.querySelectorAll('.section-image').forEach(function (img) {
+    img.addEventListener('click', function () {
+      lbImg.src = this.src;
+      lbImg.alt = this.alt;
+      lb.classList.add('active');
+      document.body.style.overflow = 'hidden';
+    });
+  });
+
+  function closeLightbox() {
+    lb.classList.remove('active');
+    document.body.style.overflow = '';
+  }
+
+  lbClose.addEventListener('click', closeLightbox);
+  lb.addEventListener('click', function (e) {
+    if (e.target === lb) closeLightbox();
+  });
+
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape') closeLightbox();
+  });
+})();
+
+// ============================================
+// GSAP Scroll Animations
+// ============================================
+gsap.registerPlugin(ScrollTrigger);
+
+// Parallax effect on part headers
+document.querySelectorAll('.part-header-bg').forEach(function (bg) {
+  gsap.to(bg, {
+    y: '30%',
+    ease: 'none',
+    scrollTrigger: {
+      trigger: bg.parentElement,
+      start: 'top bottom',
+      end: 'bottom top',
+      scrub: true
+    }
+  });
+});
+
+// Hero parallax
+gsap.to('.hero-bg', {
+  y: '20%',
+  ease: 'none',
+  scrollTrigger: {
+    trigger: '.hero',
+    start: 'top top',
+    end: 'bottom top',
+    scrub: true
+  }
+});
+
+// Hero fade out on scroll
+gsap.to('.hero-content', {
+  opacity: 0,
+  y: -50,
+  ease: 'none',
+  scrollTrigger: {
+    trigger: '.hero',
+    start: '30% top',
+    end: 'bottom top',
+    scrub: true
+  }
+});
+
+// Conspiracy diagram animation
+gsap.from('.conspiracy-badge', {
+  scale: 0.8,
+  opacity: 0,
+  stagger: 0.2,
+  duration: 0.6,
+  ease: 'back.out(1.7)',
+  scrollTrigger: {
+    trigger: '.conspiracy-diagram',
+    start: 'top 80%',
+    toggleActions: 'play none none none'
+  }
+});
+
+// Timeline items staggered entrance
+gsap.from('.timeline-item', {
+  opacity: 0,
+  x: function (i) { return i % 2 === 0 ? -50 : 50; },
+  stagger: 0.15,
+  duration: 0.6,
+  ease: 'power2.out',
+  scrollTrigger: {
+    trigger: '.timeline',
+    start: 'top 80%',
+    toggleActions: 'play none none none'
+  }
+});
+
+// Character cards hover glow
+document.querySelectorAll('.character-card').forEach(function (card) {
+  card.addEventListener('mouseenter', function () {
+    gsap.to(this, { duration: 0.3, boxShadow: '0 0 30px rgba(212, 160, 23, 0.15)' });
+  });
+  card.addEventListener('mouseleave', function () {
+    gsap.to(this, { duration: 0.3, boxShadow: 'none' });
+  });
+});
+</script>
+
+</body>
+</html>
