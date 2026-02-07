@@ -2193,19 +2193,7 @@ gsap.from('.conspiracy-badge', {
   }
 });
 
-// Timeline items staggered entrance
-gsap.from('.timeline-item', {
-  opacity: 0,
-  x: function (i) { return i % 2 === 0 ? -50 : 50; },
-  stagger: 0.15,
-  duration: 0.6,
-  ease: 'power2.out',
-  scrollTrigger: {
-    trigger: '.timeline',
-    start: 'top 80%',
-    toggleActions: 'play none none none'
-  }
-});
+// Timeline items - AOS handles animation (no GSAP to avoid conflict)
 
 // Character cards hover glow
 document.querySelectorAll('.character-card').forEach(function (card) {
